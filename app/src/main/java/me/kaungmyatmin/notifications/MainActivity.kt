@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -62,21 +61,5 @@ class MainActivity : AppCompatActivity() {
             notificationManager.notify(2, notification)
         }
 
-        btnToken.setOnClickListener {
-            FirebaseInstanceId.getInstance().instanceId
-                .addOnCompleteListener { task ->
-                    // 2
-                    if (!task.isSuccessful) {
-                        Log.w("ssss", "getInstanceId failed", task.exception)
-                        return@addOnCompleteListener
-                    }
-                    // 3
-                    val token = task.result?.token
-
-                    // 4
-                    Log.d("ssss", token ?: "fail")
-                    Toast.makeText(baseContext, token, Toast.LENGTH_LONG).show()
-                }
-        }
     }
 }
